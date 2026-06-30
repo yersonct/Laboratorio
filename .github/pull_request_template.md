@@ -1,52 +1,70 @@
 ## Rama destino
 
-- [ ] `dev` — trabajo en curso (caso normal)
-- [ ] `qa` — validación (solo desde `hu-*-qa` o cherry-pick aprobado desde `dev`)
-- [ ] `main` — solo desde `release/*` o `fix/doc-*` de hotfix
+- [ ] `dev` — integración de cambios de desarrollo (destino normal para feature/, docs/, chore/ y fix/)
+- [ ] `qa` — validación funcional y pruebas de calidad (solo desde `dev`)
+- [ ] `staging` — preproducción (solo desde `qa`)
+- [ ] `main` — producción (solo desde `staging` o `hotfix/*` aprobado)
+
+---
 
 ## Tipo de cambio
 
-- [ ] Documento nuevo
-- [ ] Actualización de documento existente
+- [ ] Nueva documentación
+- [ ] Actualización de documentación
+- [ ] Configuración del repositorio (`chore`)
 - [ ] Corrección menor
 - [ ] Reorganización / archivo movido
-- [ ] Diagrama o asset
+- [ ] Diagrama o recurso gráfico
+
+---
 
 ## Secciones afectadas
 
-<!-- Ejemplo: 04-requirements, 08-uml, 13-operations -->
+<!-- Ejemplo:
+00-governance
+04-requirements
+09-microservices
+-->
 
-## Definition of Ready — ¿el documento está listo para revisión?
+---
+
+## Definition of Ready
 
 Ver criterios completos en [00-governance/definition-of-ready.md](../00-governance/definition-of-ready.md)
 
-- [ ] Tiene título, estado, fecha y autor o equipo responsable
-- [ ] Explica su contexto y propósito
-- [ ] El contenido cubre el alcance mínimo acordado para revisión
-- [ ] Está enlazado desde el `README.md` de su sección
-- [ ] No contiene información sensible
+- [ ] Tiene título, estado, fecha y responsable.
+- [ ] Explica claramente el propósito.
+- [ ] Cumple el alcance definido para la sección.
+- [ ] Está enlazado desde el README correspondiente.
+- [ ] No contiene información sensible.
+
+---
 
 ## Checklist obligatorio
 
-- [ ] El documento tiene estado y última actualización.
-- [ ] El documento está registrado en el README.md de su sección.
-- [ ] Los commits siguen Conventional Commits (obligatorio): formato `<type>(NN-section): short description in English`. Ver [00-governance/git-conventions.md](../00-governance/git-conventions.md).
-- [ ] Si se documentan varios microservicios, se estructuró con un commit por microservicio.
-- [ ] No se incluyen credenciales, tokens, llaves privadas, datos personales ni URLs privadas sensibles.
-- [ ] Los enlaces relativos funcionan.
-- [ ] Si hay diagramas, se incluye fuente editable (`.wsd`) y exportación (`.svg`) en `08-uml/`.
-- [ ] Si es ADR, se registró en `05-architecture/decisions/README.md`.
-- [ ] Si es microservicio, se registró en `09-microservices/service-catalog.md`.
-- [ ] CHANGELOG.md fue actualizado si el cambio es relevante para todo el equipo.
+- [ ] El documento tiene estado y fecha de actualización.
+- [ ] Está registrado en el README de su sección.
+- [ ] Los commits siguen Conventional Commits.
+- [ ] Si documenta varios microservicios, cada uno tiene su propio commit.
+- [ ] No contiene credenciales ni información sensible.
+- [ ] Todos los enlaces funcionan.
+- [ ] Los diagramas incluyen archivo editable (.wsd) y exportación (.svg).
+- [ ] Si aplica, el ADR fue registrado.
+- [ ] Si aplica, el microservicio fue registrado en el catálogo.
+- [ ] Se actualizó el CHANGELOG.md cuando corresponde.
 
-## Definition of Done — para el revisor
+---
+
+## Definition of Done
 
 Ver criterios completos en [00-governance/definition-of-done.md](../00-governance/definition-of-done.md)
 
-- [ ] Aprobado por al menos un revisor del equipo responsable de la sección
-- [ ] El estado del documento cambia a 🟢 si corresponde
-- [ ] Los enlaces relativos funcionan en la rama destino
+- [ ] Aprobado por al menos un revisor.
+- [ ] El documento queda en estado 🟢 cuando corresponde.
+- [ ] Los enlaces funcionan correctamente en la rama destino.
+
+---
 
 ## Notas para revisores
 
-<!-- Riesgos, pendientes conocidos o contexto necesario para revisar. -->
+<!-- Riesgos, observaciones o información adicional -->
