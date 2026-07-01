@@ -1,19 +1,21 @@
 # Seguridad documental
 
-> Estado: 🟡 En progreso | Última actualización: 2026-06-16
-> Autor: Por definir | Equipo: Por definir
+> Estado: 🟡 En progreso | Última actualización: 2026-06-30
+> Autor: Yerson Rubiano | Equipo: Oferta y Programa
 
-Este repositorio puede ser consultado por varios equipos. La documentación debe usar ejemplos seguros y evitar exposición de información sensible.
+## Contexto
+
+Este documento establece las reglas para proteger la información del proyecto y prevenir la publicación de datos sensibles dentro del repositorio. Todos los ejemplos, diagramas y documentos deben utilizar información ficticia o anonimizada.
 
 ## No publicar
 
 - Credenciales, contraseñas, tokens o llaves privadas.
 - Certificados, archivos `.env`, `.pem`, `.key`, `.p12` o `.pfx`.
 - Datos personales reales de aprendices, instructores, administradores o usuarios.
-- Correos reales, teléfonos, números de documento o identificadores personales.
-- Capturas de pantalla con sesiones abiertas o datos operativos reales.
-- URLs internas privadas, IPs, nombres de host o rutas de red sensibles.
-- Procedimientos que permitan saltarse controles de seguridad.
+- Correos electrónicos reales, teléfonos, números de documento o identificadores personales.
+- Capturas de pantalla con sesiones abiertas o información operativa real.
+- URLs internas privadas, direcciones IP, nombres de host o rutas de red sensibles.
+- Procedimientos que permitan eludir controles de seguridad.
 
 ## Usar en ejemplos
 
@@ -23,38 +25,38 @@ Este repositorio puede ser consultado por varios equipos. La documentación debe
 | Token | `TOKEN_DE_EJEMPLO` |
 | URL | `https://example.com/api` |
 | Servicio | `sena-horarios-service` |
-| Documento | `1234567890` solo si se aclara que es ficticio |
+| Documento | `1234567890` (aclarando que es un dato ficticio) |
 
 ## Antes de subir capturas
 
-- Revisar que no haya nombres reales.
-- Ocultar correos, documentos, tokens y sesiones.
-- Confirmar que la captura aporta valor documental.
-- Guardar la imagen en `assets/images/` y referenciarla desde el documento.
+- Verificar que no existan nombres de personas reales.
+- Ocultar correos electrónicos, documentos, tokens y sesiones activas.
+- Confirmar que la captura aporte valor a la documentación.
+- Guardar la imagen en `assets/images/` y referenciarla desde el documento correspondiente.
 
 ## Si se detecta una fuga
 
-1. No crear más commits con el secreto o dato sensible.
-2. Avisar al responsable del repositorio y al equipo de seguridad o arquitectura.
-3. Rotar la credencial si aplica.
-4. Abrir un PR que reemplace el contenido por un ejemplo seguro.
-5. Evaluar limpieza de historial si el dato quedó versionado.
+1. No realizar nuevos commits que contengan el dato sensible.
+2. Informar inmediatamente al responsable del repositorio y al equipo de arquitectura o seguridad.
+3. Revocar o rotar la credencial comprometida, si aplica.
+4. Crear un Pull Request reemplazando la información sensible por un ejemplo seguro.
+5. Evaluar la limpieza del historial del repositorio si la información quedó versionada.
 
 ## Contacto de seguridad
 
-En caso de fuga confirmada o sospecha de exposición de datos sensibles:
+En caso de detectar una posible exposición de información sensible, contactar al responsable del repositorio y seguir el procedimiento definido por el equipo.
 
-| Rol | Handle / Canal |
-|-----|---------------|
-| Responsable del repositorio | `@[completar con handle real]` |
-| Equipo de arquitectura | `@equipo-arquitectura` → `[completar con canal: Slack/Teams/email]` |
+| Rol | Responsable |
+|-----|-------------|
+| Responsable del repositorio | **Por definir** |
+| Equipo de arquitectura | **Por definir** |
 
-Ante una credencial comprometida: **rotar primero, avisar después**. No esperar confirmación para rotar.
+> **Nota:** Una vez el instructor o el equipo definan los responsables oficiales, actualizar esta sección con los usuarios o canales correspondientes.
 
 ## Checklist
 
 - [ ] No hay credenciales ni tokens.
 - [ ] No hay datos personales reales.
 - [ ] No hay URLs internas privadas.
-- [ ] No hay capturas con sesiones o datos reales.
-- [ ] Los ejemplos usan valores ficticios.
+- [ ] No hay capturas con sesiones o información real.
+- [ ] Todos los ejemplos utilizan datos ficticios.

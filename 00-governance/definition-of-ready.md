@@ -1,7 +1,7 @@
 # Definition of Ready
 
-> Estado: 🟡 En progreso | Última actualización: 2026-06-16
-> Autor: Por definir | Equipo: Por definir
+> Estado: 🟡 En progreso | Última actualización: 2026-06-30
+> Autor: Yerson Rubiano | Equipo: Oferta y Programa
 
 Un documento está **listo para revisión** cuando:
 

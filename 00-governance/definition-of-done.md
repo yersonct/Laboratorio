@@ -1,7 +1,7 @@
 # Definition of Done
 
-> Estado: 🟡 En progreso | Última actualización: 2026-06-16
-> Autor: Por definir | Equipo: Por definir
+> Estado: 🟡 En progreso | Última actualización: 2026-06-30
+> Autor: Yerson Rubiano | Equipo: Oferta y Programa
 
 Un documento está **done** cuando:
 
@@ -10,4 +10,4 @@ Un documento está **done** cuando:
 - [ ] El estado cambió a 🟢
 - [ ] Los enlaces relativos funcionan
 - [ ] No contiene información sensible
-- [ ] El CHANGELOG fue actualizado si el cambio modifica gobernanza, estructura de carpetas, o un contrato compartido (API, modelo de datos, convenciones de Git)
+- [ ] El CHANGELOG fue actualizado si el cambio modifica gobernanza, estructura de carpetas o un contrato compartido (API, modelo de datos, convenciones de Git)
