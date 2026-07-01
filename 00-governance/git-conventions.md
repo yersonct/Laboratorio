@@ -1,101 +1,98 @@
 # Convenciones de Git
-
-> Estado: 🟡 En progreso | Última actualización: 2026-06-16
-> Autor: Por definir | Equipo: Por definir
+> Estado: 🟡 En progreso | Última actualización: 2026-06-30
+> Autor: Yerson Rubiano | Equipo: Oferta y Programa
 
 Este repositorio usa ramas protegidas, Pull Requests y Conventional Commits para mantener trazabilidad documental.
 
 ## Ramas protegidas
 
-`dev`, `qa` y `main` representan ambientes padre y no se trabajan directamente.
+`dev`, `qa`, `staging` y `main` representan ramas protegidas y no se trabajan directamente.
 
 | Rama | Propósito | Regla |
 |------|-----------|-------|
-| `dev` | Integración de trabajo en desarrollo | Recibe PRs desde ramas hijas |
-| `qa` | Validación funcional y técnica | Recibe PRs o cherry-picks aprobados desde `dev` |
-| `main` | Producción / documentación estable | Recibe solo PRs desde `release/*` |
+| `dev` | Integración de trabajo en desarrollo | Recibe PRs desde ramas hijas (`docs/*`, `chore/*`, `fix/*`, `feat/*`) |
+| `qa` | Validación funcional y técnica | Recibe PRs únicamente desde `dev` |
+| `staging` | Preproducción | Recibe PRs únicamente desde `qa` |
+| `main` | Producción / documentación estable | Recibe PRs únicamente desde `staging` o `fix/*` en caso de hotfix |
 
 ## Ramas documentales
 
 | Tipo de rama | Cuándo usarla | Ejemplo | Tipo de commit |
 |--------------|---------------|---------|----------------|
-| `feat` | Documento nuevo | `feat/doc-api-guidelines` | `docs` |
-| `fix` | Corrección de contenido | `fix/doc-scope` | `fix` |
-| `chore` | Reorganización o renombrado | `chore/doc-move-adr-003` | `chore` |
-| `docs` | Actualización de documento existente | `docs/doc-service-catalog` | `docs` |
+| `docs` | Crear o actualizar documentación | `docs/update-governance-docs` | `docs` |
+| `chore` | Configuración y mantenimiento | `chore/setup-governance` | `chore` |
+| `fix` | Corrección de documentación | `fix/documentation-links` | `fix` |
+| `feat` | Nueva funcionalidad documental (si aplica) | `feat/service-catalog` | `docs` |
 
 El tipo de rama describe intención. El tipo del commit sigue Conventional Commits.
 
 ## Ramas por historia de usuario
 
-| Caso | Rama base | Formato | Ejemplo |
-|------|-----------|---------|---------|
-| Desarrollo de HU | `dev` | `hu-<numero>-dev` | `hu-01-dev` |
-| Ajuste o validación QA | `qa` | `hu-<numero>-qa` | `hu-01-qa` |
-| Release de iteración | `main` | `release/<iteracion>` | `release/iteration-01` |
+## Flujo de ramas
 
-Las ramas `hu-*` son un caso especial para trazabilidad por historia. No siguen el formato `<tipo>/doc-*`.
+| Caso | Rama origen | Rama destino | Ejemplo |
+|------|-------------|--------------|---------|
+| Nueva documentación | `docs/*` | `dev` | `docs/update-governance-docs` |
+| Configuración del repositorio | `chore/*` | `dev` | `chore/setup-governance` |
+| Corrección documental | `fix/*` | `dev` | `fix/documentation-links` |
+| Promoción a QA | `dev` | `qa` | Pull Request `dev → qa` |
+| Promoción a Staging | `qa` | `staging` | Pull Request `qa → staging` |
+| Promoción a Producción | `staging` | `main` | Pull Request `staging → main` |
+
+Las ramas temporales (`docs/*`, `chore/*`, `fix/*` y `feat/*`) siempre se crean desde `dev`. Una vez aprobados los cambios mediante Pull Request, la rama temporal debe eliminarse tanto del repositorio remoto como del entorno local.
+
+---
 
 ## Flujo hacia dev
 
 ```bash
 git checkout dev
 git pull origin dev
-git checkout -b hu-01-dev
+git checkout -b docs/update-governance-docs
 
-git add <archivos>
-git commit -m "docs(04-requirements): add scheduling availability user story"
-git push origin hu-01-dev
+git add .
+git commit -m "docs(00-governance): update governance documentation"
+git push -u origin docs/update-governance-docs
 ```
 
-Abrir PR de `hu-01-dev` hacia `dev`.
+Abrir Pull Request de `docs/update-governance-docs` hacia `dev`.
+
+---
 
 ## Flujo hacia qa
 
-Crear rama hija desde `qa`:
+Una vez aprobado el Pull Request en `dev`, promover los cambios mediante un nuevo Pull Request:
 
-```bash
-git checkout qa
-git pull origin qa
-git checkout -b hu-01-qa
+```text
+Origen:  dev
+Destino: qa
 ```
 
-Llevar cambios con merge cuando la HU completa pasa igual:
+No se crean ramas temporales para esta promoción.
 
-```bash
-git merge origin/hu-01-dev
-git push origin hu-01-qa
+---
+
+## Flujo hacia staging
+
+Una vez validados los cambios en `qa`, promoverlos hacia `staging` mediante Pull Request:
+
+```text
+Origen:  qa
+Destino: staging
 ```
 
-O con cherry-pick cuando solo pasan commits específicos:
+---
 
-```bash
-git cherry-pick <commit-sha>
-git push origin hu-01-qa
+## Flujo hacia main
+
+Una vez aprobados los cambios en `staging`, promoverlos hacia `main` mediante Pull Request:
+
+```text
+Origen:  staging
+Destino: main
 ```
 
-Abrir PR de `hu-01-qa` hacia `qa`.
-
-## Release hacia main
-
-`main` representa documentación estable. Para producción, crear una rama release desde `main`:
-
-```bash
-git checkout main
-git pull origin main
-git checkout -b release/iteration-01
-```
-
-La rama release puede acumular varias HUs de una iteración:
-
-```bash
-git cherry-pick <commit-hu-01>
-git cherry-pick <commit-hu-02>
-git cherry-pick <commit-hu-03>
-git push origin release/iteration-01
-```
-
-Abrir PR de `release/iteration-01` hacia `main`.
+---
 
 ## Conventional Commits
 
@@ -111,54 +108,59 @@ Tipos permitidos:
 |------|-----|
 | `docs` | Crear o actualizar documentación |
 | `fix` | Corregir contenido incorrecto |
-| `chore` | Mover, renombrar, reordenar o actualizar metadatos |
-| `refactor` | Reestructurar documentación sin cambiar significado |
+| `chore` | Configuración, metadatos, reorganización o renombrado |
+| `refactor` | Reestructurar documentación sin cambiar su significado |
 
-No usar `feat`, `style`, `test`, `perf`, `build` ni `ci` para commits de este repositorio documental.
+No usar `style`, `test`, `perf`, `build` ni `ci` para este repositorio documental.
 
 Ejemplos:
 
 ```bash
 docs(04-requirements): add scheduling user stories
-docs(09-microservices): register auth service
+docs(09-microservices): register offer service
 fix(01-context): clarify project scope
-chore(08-uml): export sequence diagrams to SVG
-refactor(00-governance): split contribution rules by topic
+chore(00-governance): update repository configuration
+refactor(08-uml): reorganize sequence diagrams
 ```
+
+---
 
 ## Reglas de commits
 
-- La descripción del commit va en inglés.
-- El contenido de los documentos puede estar en español.
-- Los commits deben ser pequeños y trazables.
-- Si se documentan varios microservicios, usar un commit por microservicio cuando sea posible.
-- No mezclar cambios funcionales de varias secciones sin razón clara.
+- La descripción del commit debe escribirse en inglés.
+- El contenido de los documentos puede escribirse en español.
+- Los commits deben ser pequeños, claros y trazables.
+- Realizar un commit por cada cambio lógico.
+- No mezclar cambios de varias secciones sin una justificación clara.
+
+---
 
 ## Hotfix en main
 
-Cuando se detecta un error crítico en `main` que no puede esperar el flujo normal de release:
+Cuando se detecta un error crítico en `main` que no puede esperar el flujo normal:
 
 | Caso | Rama base | Formato | Ejemplo |
 |------|-----------|---------|---------|
-| Corrección urgente en documentación estable | `main` | `fix/doc-<descripcion>` | `fix/doc-broken-api-contract` |
+| Corrección urgente | `main` | `fix/<descripcion>` | `fix/broken-api-contract` |
 
 Flujo:
 
 ```bash
 git checkout main
 git pull origin main
-git checkout -b fix/doc-broken-api-contract
+git checkout -b fix/broken-api-contract
 
-git add <archivos>
-git commit -m "fix(07-api): correct broken endpoint reference in contract"
-git push origin fix/doc-broken-api-contract
+git add .
+git commit -m "fix(07-api): correct broken endpoint reference"
+git push -u origin fix/broken-api-contract
 ```
 
-Abrir PR directo de `fix/doc-*` hacia `main`. Una vez mergeado, aplicar el mismo fix a `qa` y `dev` con cherry-pick:
+Abrir Pull Request de `fix/broken-api-contract` hacia `main`.
 
-```bash
-git checkout qa
-git pull origin qa
-git cherry-pick <commit-sha>
-git push origin qa
+Una vez aprobado el hotfix, sincronizar el cambio hacia las demás ramas protegidas mediante Pull Request o `cherry-pick`, según la estrategia del equipo:
+
+```text
+main → staging
+staging → qa
+qa → dev
 ```
