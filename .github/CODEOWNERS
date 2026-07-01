@@ -1,67 +1,50 @@
-# CODEOWNERS — design-software-docs
-#
-# Cada sección tiene un equipo responsable de revisar y aprobar PRs.
-# El equipo listado aquí es el revisor OBLIGATORIO para cambios en esa ruta.
-# Sintaxis: <patron> @<owner>
-#
-# Reemplazar los placeholders con los handles reales de GitHub/GitLab del equipo.
-# Un PR solo puede hacer merge cuando el owner de la sección aprueba.
+# Responsable por defecto
+* @yersonct
 
-# Catch-all — cualquier archivo sin owner específico requiere revisión de arquitectura
-*                               @equipo-arquitectura
+# Gobernanza
+/00-governance/ @yersonct
 
-# Governance — responsabilidad de arquitectura
-/00-governance/         @equipo-arquitectura
-/.github/               @equipo-arquitectura
-/CONTRIBUTING.md        @equipo-arquitectura
+# Contexto
+/01-context/ @yersonct
 
-# Contexto y dominio — responsabilidad compartida arquitectura + producto
-/01-context/            @equipo-producto @equipo-arquitectura
-/02-domain/             @equipo-arquitectura @equipo-backend
+# Dominio
+/02-domain/ @yersonct
 
-# Producto — responsabilidad de producto
-/03-product/            @equipo-producto
+# Producto
+/03-product/ @yersonct
 
-# Requisitos — responsabilidad de análisis/producto
-/04-requirements/       @equipo-producto @equipo-analisis
+# Requerimientos
+/04-requirements/ @yersonct
 
-# Arquitectura y decisiones — responsabilidad de arquitectura
-/05-architecture/       @equipo-arquitectura
+# Arquitectura
+/05-architecture/ @yersonct
 
-# Datos — responsabilidad de datos/backend
-/06-data/               @equipo-datos @equipo-backend
+# Datos
+/06-data/ @yersonct
 
-# API — responsabilidad de arquitectura + backend
-/07-api/                @equipo-arquitectura @equipo-backend
+# API
+/07-api/ @yersonct
 
-# UML — responsabilidad de quien genera el diagrama (sección de origen)
-# Los PRs de diagramas deben ser aprobados por el owner de la sección de contenido.
-/08-uml/                @equipo-arquitectura
+# UML
+/08-uml/ @yersonct
 
-# Microservicios — responsabilidad del equipo dueño de cada servicio
-/09-microservices/      @equipo-backend
-/09-microservices/service-catalog.md    @equipo-arquitectura
+# Microservicios
+/09-microservices/ @yersonct
 
-# DevOps — responsabilidad de DevOps/infraestructura
-/10-devops/             @equipo-devops
+# DevOps
+/10-devops/ @yersonct
 
-# Calidad — responsabilidad de calidad/QA
-/11-quality/            @equipo-calidad
+# Calidad
+/11-quality/ @yersonct
 
-# UX/UI — responsabilidad de diseño
-/12-ux-ui/              @equipo-uxui
+# UX/UI
+/12-ux-ui/ @yersonct
 
-# Operaciones — responsabilidad de DevOps/operaciones
-/13-operations/         @equipo-devops @equipo-operaciones
+# Operaciones
+/13-operations/ @yersonct
 
-# Entrenamiento — responsabilidad compartida soporte + producto
-/14-training/           @equipo-soporte @equipo-producto
+# Entrenamiento
+/14-training/ @yersonct
 
-# Control de proyecto — responsabilidad de arquitectura + gestión
-/15-project-control/    @equipo-arquitectura @equipo-gestion
-
-# Archivo — solo arquitectura puede archivar/restaurar documentos
-/99-archive/            @equipo-arquitectura
-
-# Assets globales
-/assets/                @equipo-arquitectura
+# Control del proyecto
+/15-project-control/ @yersonct
